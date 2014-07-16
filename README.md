@@ -9,21 +9,22 @@ Bug List:
 It doesn’t exist … 
 
 Structure:
-HomePage
-|
-|
-V
-|___>_____Register - unique state
-|	|
-V   /\
-|   |
-|___Sign in - unique state
-|
-V
-|___Chat -> List of users (online and offline)____>____Sign out -> HomePage
-       |
-       V
-       |___Talk with one of them ___>___Sign out -> HomePage
+-------
+	HomePage
+	|
+	|
+	V
+	|___>_____Register - unique state
+	|	|
+	V   /\
+	|   |
+	|___Sign in - unique state
+	|
+	V
+	|___Chat -> List of users (online and offline)____>____Sign out -> HomePage
+	       |
+	       V
+	       |___Talk with one of them ___>___Sign out -> HomePage
 
 
 
