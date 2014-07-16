@@ -3,9 +3,10 @@ Awesome Chat - V2.0
 
 Feature List:
 -------
-Awesome Chat
-Simple Login
-Real-Time Messaging
+- Awesome Chat
+- Simple Login
+- Real-Time Messaging
+
 
 Bug List:
 -------
