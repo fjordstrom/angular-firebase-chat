@@ -1,11 +1,14 @@
 Awesome Chat - V2.0
+-------
 
 Feature List:
+-------
 Awesome Chat
 Simple Login
 Real-Time Messaging
 
 Bug List:
+-------
 It doesn’t exist … 
 
 Structure:
