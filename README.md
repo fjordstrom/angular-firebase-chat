@@ -49,35 +49,35 @@ Services
 --------
 
 firebase DB connect
-	get db URL from a file, conn
-	assert error if it doesn't wanna
+-	get db URL from a file, conn
+-	assert error if it doesn't wanna
 
 get messages and parse (for an user)
-	basically, all data pertaining to user that requests
+-	basically, all data pertaining to user that requests
 
 get users and parse (for an user)
-	index by name
-	give name and online status
+-	index by name
+-	give name and online status
 
 
 find user
-	look into DB, give userID or nothing
+-	look into DB, give userID or nothing
 
 handle cookies
-	set cookie
-	delete cookie
-	retrieve cookie
+-	set cookie
+-	delete cookie
+-	retrieve cookie
 
 auth user
-	get user and get his pass, if matches, ok, else error
+-	get user and get his pass, if matches, ok, else error
 
 register user
-	verify is user is in DB, if not, then go ahead and reg, else error
+-	verify is user is in DB, if not, then go ahead and reg, else error
 
 write user in DB
-	user, pass to DB
+-	user, pass to DB
 
 look for unread status in own messagesși una care ascultă event-uri de modificare ale bazei de date și updatează lista de mesaje necitite
 
 message DB event listener
-	should tell another service if a message for current user arrives
+-	should tell another service if a message for current user arrives
