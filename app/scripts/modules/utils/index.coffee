@@ -1,2 +1,2 @@
 
-angular.module 'bk.utils', []
+angular.module 'ac.utils', []

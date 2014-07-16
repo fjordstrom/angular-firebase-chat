@@ -14,8 +14,8 @@ app = angular.module 'App', [
     'debounce'
 
     #application modules
-    'bk.states'
-    'bk.utils'
+    'ac.states'
+    'ac.utils'
 ]
 app.config([
     '$urlRouterProvider'

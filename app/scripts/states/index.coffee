@@ -4,9 +4,9 @@ require './default.coffee'
 require './home.coffee'
 require './about.coffee'
 
-notFoundState = angular.module 'bk.states', [
-    'bk.states.default'
-    'bk.states.404'
-    'bk.states.home'
-    'bk.states.about'
+notFoundState = angular.module 'ac.states', [
+    'ac.states.default'
+    'ac.states.404'
+    'ac.states.home'
+    'ac.states.about'
 ]
