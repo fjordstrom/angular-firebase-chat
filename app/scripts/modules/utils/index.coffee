@@ -1,0 +1,2 @@
+
+angular.module 'bk.utils', []
