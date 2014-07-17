@@ -1,6 +1,6 @@
-awesomeChat = angular.module 'ac.states.register', []
+register = angular.module 'ac.states.register', []
 
-awesomeChat.config ($stateProvider) ->
+register.config ($stateProvider) ->
     $stateProvider.state 'register',
         url: '/register'
         parent: 'default'
@@ -9,6 +9,7 @@ awesomeChat.config ($stateProvider) ->
                 templateUrl: 'partials/partials/header.html'
             content:
                 templateUrl: 'partials/states/register.html'
+                controller: register_controller
         data:
             pageTitle: "Awesome <strong>Chat</strong>"
             meta:
@@ -16,3 +17,9 @@ awesomeChat.config ($stateProvider) ->
                 keywords: 'chat, awesome'
                 description: 'Chat with awesome people.'
 
+
+class register_controller
+    @$inject = [
+        '$scope'
+    ]
+    constructor: (@$scope) ->
