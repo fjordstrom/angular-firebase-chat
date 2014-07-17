@@ -1,7 +1,7 @@
 'use strict';
 
 require "./states/index.coffee"
-require './modules/utils/index.coffee'
+require "./modules/firebase/index.coffee"
 
 app = angular.module 'App', [
     #3rd party modules
@@ -12,10 +12,9 @@ app = angular.module 'App', [
     'restangular'
     'ui.router'
     'debounce'
-
+    'ac.firebase'
     #application modules
     'ac.states'
-    'ac.utils'
 ]
 app.config([
     '$urlRouterProvider'
@@ -23,6 +22,7 @@ app.config([
     ($urlRouterProvider, $locationProvider) ->
         $locationProvider.html5Mode(true).hashPrefix('!')
         $urlRouterProvider.otherwise '/404'
+
 ])
 app.run ($rootScope) ->
     $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
