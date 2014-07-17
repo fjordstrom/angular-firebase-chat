@@ -34,7 +34,7 @@ fbmodule.factory 'acUsers', [
                 deferred = $q.defer()
                 @getUsers().then (userList) ->
                     for id, user of userList
-                        if account.name == user.name
+                        if account.name.lowercase == user.name.lowercase
                             deferred.reject {desc: "The user #{account.name} already exists!"}
                             return
 
