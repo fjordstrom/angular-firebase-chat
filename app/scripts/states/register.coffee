@@ -1,4 +1,4 @@
-register = angular.module 'ac.states.register', []
+register = angular.module 'ac.states.register', ['ac.firebase.register']
 
 register.config ($stateProvider) ->
     $stateProvider.state 'register',
