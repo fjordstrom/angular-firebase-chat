@@ -1,4 +1,4 @@
-fbmodule = angular.module 'ac.firebase.users', ['ac.firebase.databaseCreator','angular-md5']
+fbmodule = angular.module 'ac.firebase.users', ['ac.firebase.databaseCreator','ac.utils.cookies','angular-md5']
 
 fbmodule.config [
     'firebaseHandleProvider'
@@ -8,9 +8,10 @@ fbmodule.config [
 
 fbmodule.factory 'acUsers', [
     'firebaseHandle'
+    'acCookies'
     '$q'
     'md5'
-    (firebaseHandle, $q,md5) ->
+    (firebaseHandle, cookie, $q, md5) ->
         database = firebaseHandle.getDatabase firebaseHandle.availableDatabases.user
         return {
             getUsers: ->
@@ -50,6 +51,24 @@ fbmodule.factory 'acUsers', [
                 , (err) ->
                     deferred.reject err
                 deferred.promise
+
+            authUser: (name,pass) ->
+                deferred = $q.defer()
+                @getUsers().then (userList) ->
+                    for id, user of userList
+                        if name.lowercase == user.name.lowercase && md5.createHash pass == user.pass
+                            database.$child(id).$update({
+                                isLoggedIn: true
+                            })
+                            cookie.setCookie(id)
+                            return
+                    deferred.reject "Credentials invalid"
+                , (err) ->
+                    deferred.reject err
+                deferred.promise
+
+            deauthUser: ->
+
         }
 
 ]

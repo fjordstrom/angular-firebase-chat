@@ -23,7 +23,6 @@ class register_controller
         'acUsers'
     ]
     constructor: (@$scope, @acUsers) ->
-        @$scope.account = {}
 
     register: (account) ->
         @acUsers.addUser(account).then (user) ->

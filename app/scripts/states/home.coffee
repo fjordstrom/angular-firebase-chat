@@ -31,5 +31,9 @@ class awesomeChat_controller
         'userList'
     ]
     constructor: (@$scope,@firebaseHandle, userList) ->
-        #console.log "do stuff"
-        @$scope.userList = userList
+
+    login: (account) ->
+        @acUsers.authUser(account).then (user) ->
+            "nothing"
+        , (err) ->
+            alert "#{err.desc}"

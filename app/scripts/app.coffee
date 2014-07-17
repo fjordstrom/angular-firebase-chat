@@ -1,7 +1,7 @@
 'use strict';
 
 require "./states/index.coffee"
-require "./modules/firebase/index.coffee"
+require "./modules/index.coffee"
 
 app = angular.module 'App', [
     #3rd party modules
@@ -12,7 +12,7 @@ app = angular.module 'App', [
     'restangular'
     'ui.router'
     'debounce'
-    'ac.firebase'
+    'ac.modules'
     #application modules
     'ac.states'
 ]
