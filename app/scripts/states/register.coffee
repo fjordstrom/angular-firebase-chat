@@ -9,7 +9,7 @@ register.config ($stateProvider) ->
                 templateUrl: 'partials/partials/header.html'
             content:
                 templateUrl: 'partials/states/register.html'
-                controller: register_controller
+                controller: "register_controller as regCtrl"
         data:
             pageTitle: "Awesome <strong>Chat</strong>"
             meta:
@@ -22,8 +22,14 @@ class register_controller
         '$scope'
         'acUsers'
     ]
-    constructor: (@$scope, acUsers) ->
-        acUsers.addUser('dick','dick','dick').then (user) ->
-            alert "Succesfully added"
+    constructor: (@$scope, @acUsers) ->
+        @$scope.account = {}
+
+
+    register: (account) ->
+        @acUsers.addUser(account).then (user) ->
+            alert "User #{account.name} was succesfully added!"
         , (err) ->
             alert "#{err.desc}"
+
+register.controller "register_controller", register_controller
