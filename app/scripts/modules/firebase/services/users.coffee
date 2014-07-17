@@ -34,13 +34,10 @@ fbmodule.factory 'acUsers', [
                 deferred = $q.defer()
                 @getUsers().then (userList) ->
                     for id, user of userList
-                        console.log 'user',user, name
                         if name == user.name
-                            console.log 'found'
                             deferred.reject {desc: "the user #{name} already exists"}
                             return
 
-                    console.log 'adding user'
                     database.$add(
                         name: name
                         email: email
