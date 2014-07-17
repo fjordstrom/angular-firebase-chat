@@ -1,6 +1,5 @@
 cookieModule = angular.module 'ac.utils.cookies', ['ngCookies']
 
-
 cookieModule.factory 'acCookies', [
     '$cookies'
     ($cookies) ->

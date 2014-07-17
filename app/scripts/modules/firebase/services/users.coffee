@@ -61,6 +61,7 @@ fbmodule.factory 'acUsers', [
                                 isLoggedIn: true
                             })
                             cookie.setCookie(id)
+                            deferred.resolve user.name
                             return
                     deferred.reject "Credentials invalid"
                 , (err) ->
@@ -69,7 +70,7 @@ fbmodule.factory 'acUsers', [
 
             deauthUser: ->
                 if cookie.isCookieSet()
-                    database.$child(cookie.getCookie).$update({
+                    database.$child(cookie.getCookie()).$update({
                         isLoggedIn: false
                     })
                     cookie.deleteCookie()

@@ -23,17 +23,17 @@ awesomeChat.config ($stateProvider) ->
                 keywords: 'chat, awesome'
                 description: 'Chat with awesome people.'
 
-
 class awesomeChat_controller
     @$inject = [
         '$scope'
         'acUsers'
+        '$state'
     ]
-    constructor: (@$scope, @acUsers) ->
+    constructor: (@$scope, @acUsers, @$state) ->
 
     login: (account) ->
-        @acUsers.authUser(account).then (user) ->
-            alert 'Signed in!'
+        @acUsers.authUser(account).then (user) =>
+            @$state.go 'userPanel'
         , (err) ->
             alert "#{err.desc}"
 
