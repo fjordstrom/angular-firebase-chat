@@ -9,7 +9,6 @@ awesomeChat.config ($stateProvider) ->
                 templateUrl: 'partials/partials/header.html'
             content:
                 templateUrl: 'partials/states/register.html'
-                controller: awesomeChat_controller
         data:
             pageTitle: "Awesome <strong>Chat</strong>"
             meta:
