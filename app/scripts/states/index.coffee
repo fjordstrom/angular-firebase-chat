@@ -1,4 +1,5 @@
 'use strict'
+
 require './404.coffee'
 require './default.coffee'
 require './home.coffee'

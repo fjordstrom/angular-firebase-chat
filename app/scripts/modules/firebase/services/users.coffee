@@ -35,7 +35,7 @@ fbmodule.factory 'acUsers', [
                 deferred = $q.defer()
                 @getUsers().then (userList) ->
                     for id, user of userList
-                        if account.name.lowercase == user.name.lowercase
+                        if account.name.toLowerCase == user.name.toLowerCase
                             deferred.reject {desc: "The user #{account.name} already exists!"}
                             return
 
@@ -52,11 +52,11 @@ fbmodule.factory 'acUsers', [
                     deferred.reject err
                 deferred.promise
 
-            authUser: (name,pass) ->
+            authUser: (account) ->
                 deferred = $q.defer()
                 @getUsers().then (userList) ->
                     for id, user of userList
-                        if name.lowercase == user.name.lowercase && md5.createHash pass == user.pass
+                        if account.name.toLowerCase == user.name.toLowerCase && user.pass == md5.createHash account.pass
                             database.$child(id).$update({
                                 isLoggedIn: true
                             })

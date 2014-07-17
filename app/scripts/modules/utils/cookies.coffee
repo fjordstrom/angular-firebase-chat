@@ -11,7 +11,7 @@ cookieModule.factory 'acCookies', [
                 delete $cookies.loggedCookie
             getCookie: ->
                 $cookies.loggedCookie
-            setCookie: (id)->
+            setCookie: (id) ->
                 $cookies.loggedCookie = id
         }
 ]

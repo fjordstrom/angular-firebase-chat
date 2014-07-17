@@ -1,4 +1,4 @@
-awesomeChat = angular.module 'ac.states.home', ['firebase']
+awesomeChat = angular.module 'ac.states.home', ['ac.firebase.users']
 
 awesomeChat.config ($stateProvider) ->
     $stateProvider.state 'home',
@@ -9,7 +9,7 @@ awesomeChat.config ($stateProvider) ->
                 templateUrl: 'partials/partials/header.html'
             content:
                 templateUrl: 'partials/states/home.html'
-                controller: awesomeChat_controller
+                controller: "awesomeChat_controller as homeCtrl"
         resolve:
             userList: [
                 'acUsers'
@@ -27,13 +27,14 @@ awesomeChat.config ($stateProvider) ->
 class awesomeChat_controller
     @$inject = [
         '$scope'
-        'firebaseHandle'
-        'userList'
+        'acUsers'
     ]
-    constructor: (@$scope,@firebaseHandle, userList) ->
+    constructor: (@$scope, @acUsers) ->
 
     login: (account) ->
         @acUsers.authUser(account).then (user) ->
-            "nothing"
+            alert 'Signed in!'
         , (err) ->
             alert "#{err.desc}"
+
+awesomeChat.controller "awesomeChat_controller", awesomeChat_controller
