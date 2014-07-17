@@ -4,9 +4,7 @@ fbmodule.config [
     'firebaseHandleProvider'
     (firebaseHandleProvider) ->
         firebaseHandleProvider.setDatabase 'user', 'users'
-
 ]
-
 
 fbmodule.factory 'acUsers', [
     'firebaseHandle'
@@ -14,7 +12,6 @@ fbmodule.factory 'acUsers', [
     'md5'
     (firebaseHandle, $q,md5) ->
         database = firebaseHandle.getDatabase firebaseHandle.availableDatabases.user
-        #console.log 'database', database
         return {
             getUsers: ->
                 deferred = $q.defer()
