@@ -17,7 +17,6 @@ register.config ($stateProvider) ->
                 keywords: 'chat, awesome'
                 description: 'Chat with awesome people.'
 
-
 class register_controller
     @$inject = [
         '$scope'
