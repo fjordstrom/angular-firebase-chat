@@ -25,7 +25,6 @@ class register_controller
     constructor: (@$scope, @acUsers) ->
         @$scope.account = {}
 
-
     register: (account) ->
         @acUsers.addUser(account).then (user) ->
             alert "User #{account.name} was succesfully added!"
