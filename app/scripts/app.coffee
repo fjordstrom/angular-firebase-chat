@@ -4,7 +4,6 @@ require "./states/index.coffee"
 require "./modules/index.coffee"
 
 app = angular.module 'App', [
-    #3rd party modules
     'ngAnimate'
     'ngCookies'
     'ngTouch'
@@ -13,7 +12,6 @@ app = angular.module 'App', [
     'ui.router'
     'debounce'
     'ac.modules'
-    #application modules
     'ac.states'
 ]
 app.config([

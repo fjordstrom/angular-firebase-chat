@@ -3,19 +3,19 @@
 		<h1>Welcome!</h1>
 	</div>
 	<div class="col-md-12">
-		<div class="well bs-component" ng-controller="MainCtrl">
+		<div class="well bs-component">
 			<p>Please sign in or make an account!</p>
-			<form class="form-horizontal " role="login">
+			<form class="form-horizontal " role="login" ng-submit="homeCtrl.login(account)">
 			    <div class="form-group">
 			    	<label for="inputUsername1" class="col-sm-2 control-label">Username</label>
 		    		<div class="col-sm-10">
-			    		<input type="text" class="form-control" id="inputUsername1" placeholder="Username">
+			    		<input type="text" class="form-control" ng-model="account.name" id="inputUsername1" placeholder="Username">
 			    	</div>
 			    </div>
 			    <div class="form-group">
 			    	<label for="inputPassword1" class="col-sm-2 control-label">Password</label>
 		    		<div class="col-sm-10">
-			    		<input type="password" class="form-control" id="inputPassword1" placeholder="Password">
+			    		<input type="password" class="form-control" ng-model="account.pass" id="inputPassword1" placeholder="Password">
 			    	</div>
 			 	</div>
 			 	<div class="form-group">
