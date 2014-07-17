@@ -1,4 +1,4 @@
-fbmodule = angular.module 'ac.firebase.users', ['ac.firebase.databaseCreator']
+fbmodule = angular.module 'ac.firebase.users', ['ac.firebase.databaseCreator','angular-md5']
 
 fbmodule.config [
     'firebaseHandleProvider'
@@ -11,7 +11,8 @@ fbmodule.config [
 fbmodule.factory 'acUsers', [
     'firebaseHandle'
     '$q'
-    (firebaseHandle, $q) ->
+    'md5'
+    (firebaseHandle, $q,md5) ->
         database = firebaseHandle.getDatabase firebaseHandle.availableDatabases.user
         #console.log 'database', database
         return {
@@ -31,7 +32,13 @@ fbmodule.factory 'acUsers', [
                     else
                         deferred.reject result
                 return deferred.promise
-
+            addUser: (name,email,pass) ->
+                database.$add {
+                    name: name
+                    email: email
+                    pass: md5.createHash pass
+                    isLoggedIn: false
+                }
 
         }
 

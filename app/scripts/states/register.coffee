@@ -20,5 +20,6 @@ register.config ($stateProvider) ->
 class register_controller
     @$inject = [
         '$scope'
+        'acRegister'
     ]
-    constructor: (@$scope) ->
+    constructor: (@$scope, acRegister) ->

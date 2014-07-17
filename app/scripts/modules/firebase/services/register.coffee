@@ -1,4 +1,4 @@
-regmodule = angular.module 'ac.firebase.register', ['ac.firebase.users', 'angular-md5']
+regmodule = angular.module 'ac.firebase.register', ['ac.firebase.users']
 
 regmodule.config [
     'firebaseHandleProvider'
@@ -10,25 +10,19 @@ regmodule.config [
 
 regmodule.factory 'acRegister', [
     'acUsers'
-    'md5'
     (users,md5) ->
-        userBase = users.getUsers
+        userBase = users.getUsers.then
         return {
             registerUser: (name,email,pass)->
                 notDuplicate = true
-
-                keys = userBase.getIndex()
-                keys.forEach (key) ->
+                #keys = userBase.getIndex()
+                angular.forEach userBase, (key) ->
+                    console.log key
                     if userBase[key].name == name
                         notDuplicate = false
 
                 if notDuplicate
-                    userBase.$add {
-                        name: name
-                        email: email
-                        pass: md5.createHash pass
-                        isLoggedIn: false
-                    }
+                    users.addUser(email,name,pass)
                 else
                     alert "Name already taken!"
         }
