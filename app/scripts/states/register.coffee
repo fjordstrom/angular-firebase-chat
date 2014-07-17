@@ -1,4 +1,4 @@
-register = angular.module 'ac.states.register', ['ac.firebase.register']
+register = angular.module 'ac.states.register', ['ac.firebase.users']
 
 register.config ($stateProvider) ->
     $stateProvider.state 'register',
@@ -20,6 +20,10 @@ register.config ($stateProvider) ->
 class register_controller
     @$inject = [
         '$scope'
-        'acRegister'
+        'acUsers'
     ]
-    constructor: (@$scope, acRegister) ->
+    constructor: (@$scope, acUsers) ->
+        acUsers.addUser('dick','dick','dick').then (user) ->
+            alert "Succesfully added"
+        , (err) ->
+            alert "#{err.desc}"

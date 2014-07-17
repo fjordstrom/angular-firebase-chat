@@ -30,13 +30,29 @@ fbmodule.factory 'acUsers', [
                         deferred.reject result
                 return deferred.promise
             addUser: (name,email,pass) ->
-                database.$add {
-                    name: name
-                    email: email
-                    pass: md5.createHash pass
-                    isLoggedIn: false
-                }
 
+                deferred = $q.defer()
+                @getUsers().then (userList) ->
+                    for id, user of userList
+                        console.log 'user',user, name
+                        if name == user.name
+                            console.log 'found'
+                            deferred.reject {desc: "the user #{name} already exists"}
+                            return
+
+                    console.log 'adding user'
+                    database.$add(
+                        name: name
+                        email: email
+                        pass: md5.createHash pass
+                        isLoggedIn: false
+                    ).then (resolve) ->
+                        deferred.resolve resolve
+                    , (err) ->
+                        deferred.reject err
+                , (err) ->
+                    deferred.reject err
+                deferred.promise
         }
 
 ]
