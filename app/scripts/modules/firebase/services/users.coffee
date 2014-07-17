@@ -68,7 +68,11 @@ fbmodule.factory 'acUsers', [
                 deferred.promise
 
             deauthUser: ->
-
+                if cookie.isCookieSet()
+                    database.$child(cookie.getCookie).$update({
+                        isLoggedIn: false
+                    })
+                    cookie.deleteCookie()
         }
 
 ]
