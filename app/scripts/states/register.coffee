@@ -22,4 +22,4 @@ class register_controller
     @$inject = [
         '$scope'
     ]
-    constructor: (@$scope,) ->
+    constructor: (@$scope) ->
