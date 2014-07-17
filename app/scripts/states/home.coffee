@@ -33,7 +33,7 @@ class awesomeChat_controller
 
     login: (account) ->
         @acUsers.authUser(account).then (user) ->
-            console.log 'da'
+            alert 'Signed in!'
         , (err) ->
             alert "#{err.desc}"
 
