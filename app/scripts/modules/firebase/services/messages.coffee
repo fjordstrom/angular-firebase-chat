@@ -31,6 +31,21 @@ fbmodule.factory 'acMessages', [
                     deferred.resolve messageList
                     return messageList
 
+            getListOfNumberOfUnreadMessages: (user) ->
+                deferred = $q.defer()
+                numberList = {}
+                @getMessages().then (preList) ->
+                    for id, msg of preList
+                        if msg.to == user && msg.isRead == false
+                            if numberList[msg.from]
+                                numberList[msg.from] += 1
+                            else
+                                numberList[msg.from] = 1
+                    deferred.resolve numberList
+                    return numberList
+
+
+
         }
 
 ]
