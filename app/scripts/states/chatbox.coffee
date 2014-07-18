@@ -1,4 +1,4 @@
-chatbox = angular.module 'ac.states.chatbox', []
+chatbox = angular.module 'ac.states.chatbox', ['ac.firebase.messages']
 
 chatbox.config ($stateProvider) ->
     $stateProvider.state 'userPanel.chatbox',
@@ -15,8 +15,9 @@ chatbox.config ($stateProvider) ->
 class ChatBox_Controller
     @$inject = [
         '$scope'
+        'acMessages'
     ]
-    constructor: (@$scope) ->
+    constructor: (@$scope, @messages) ->
 
 
 

@@ -22,14 +22,15 @@ fbmodule.factory 'acMessages', [
                 return deferred.promise
 
             getConvMessages: (receiver, sender) ->
-                keys = $database.getMessages.$getIndex()
-                keys.forEach (key) ->
-                database.$child(key).$on 'loaded', (result) ->
-                    if result
-                        deferred.resolve result
-                    else
-                        deferred.reject result
-                return deferred.promise
+                deferred = $q.defer()
+                messageList = {}
+                @getMessages().then (preList) ->
+                    for id, msg of preList
+                        if receiver == msg.to and sender == msg.from or receiver == msg.from and sender == msg.to
+                            messageList[id] = msg
+                    deferred.resolve messageList
+                    return messageList
+
         }
 
 ]
