@@ -26,7 +26,7 @@ class userPanel_controller
     constructor: (@$scope, @acUsers, @$state) ->
 
     logout: ->
-        @acUsers.deauthUser()
+        @acUsers.logoffUser()
         @$state.go 'home'
 
 userPanel.controller "userPanel_controller", userPanel_controller

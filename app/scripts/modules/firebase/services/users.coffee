@@ -52,7 +52,7 @@ fbmodule.factory 'acUsers', [
                     deferred.reject err
                 deferred.promise
 
-            authUser: (account) ->
+            loginUser: (account) ->
                 deferred = $q.defer()
                 @getUsers().then (userList) ->
                     for id, user of userList
@@ -68,12 +68,26 @@ fbmodule.factory 'acUsers', [
                     deferred.reject err
                 deferred.promise
 
-            deauthUser: ->
+            logoffUser: ->
                 if cookie.isCookieSet()
                     database.$child(cookie.getCookie()).$update({
                         isLoggedIn: false
                     })
                     cookie.deleteCookie()
-        }
 
+            isUserLogged: ->
+                deferred = $q.defer()
+                returnID = false
+                if cookie.isCookieSet()
+                    cookieID = cookie.getCookie()
+                    @getUsers().then (userList) ->
+                        for id, user of userList
+                            if cookieID == id
+                                deferred.resolve true
+                                return
+                        deferred.reject err
+                    , (err) ->
+                        deferred.reject err
+                    deferred.promise
+        }
 ]
