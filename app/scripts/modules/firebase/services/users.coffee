@@ -24,12 +24,23 @@ fbmodule.factory 'acUsers', [
                 return deferred.promise
 
             getUserById: (ID) ->
+                deferred = $q.defer()
                 database.$child(ID).$on 'loaded', (result) ->
                     if result
                         deferred.resolve result
                     else
                         deferred.reject result
                 return deferred.promise
+
+            getIdByUser: (name) ->
+                deferred = $q.defer()
+                @getUsers().then (userList) ->
+                    for id, user of userList
+                        if name == user.name
+                            deferred.resolve id
+                            return deferred.promise
+                    deferred.reject false
+                    return deferred.promise
 
             addUser: (account) ->
                 deferred = $q.defer()
@@ -61,7 +72,6 @@ fbmodule.factory 'acUsers', [
                                 isLoggedIn: true
                             })
                             cookie.setCookie(id)
-                            deferred.resolve user.name
                             return
                     deferred.reject "Credentials invalid"
                 , (err) ->
@@ -70,7 +80,7 @@ fbmodule.factory 'acUsers', [
 
             deauthUser: ->
                 if cookie.isCookieSet()
-                    database.$child(cookie.getCookie()).$update({
+                    database.$child(cookie.getCookie).$update({
                         isLoggedIn: false
                     })
                     cookie.deleteCookie()
