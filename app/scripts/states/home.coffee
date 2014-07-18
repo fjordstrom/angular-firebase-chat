@@ -32,7 +32,7 @@ class awesomeChat_controller
     ]
     constructor: (@$scope, @$rootScope, @acUsers, @$state) ->
         if @acUsers.isUserLogged()
-            @$scope.userLogged = true
+            @$rootScope.userLogged = true
             @$state.go 'userPanel'
 
     login: (account) ->
@@ -42,6 +42,7 @@ class awesomeChat_controller
                     name: account.name
                     id: id_found
                 }
+                @$rootScope.userLogged = true
             @$state.go 'userPanel'
         , (err) ->
             alert "#{err.desc}"

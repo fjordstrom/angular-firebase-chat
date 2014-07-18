@@ -38,6 +38,7 @@ class userPanel_controller
 
     logout: ->
         @acUsers.logoffUser()
+        @$rootScope.userLogged = false
         @$state.go 'home'
 
 userPanel.controller "userPanel_controller", userPanel_controller
