@@ -1,8 +1,6 @@
-'use strict'
+awesomeChat = angular.module 'ac.states.404', []
 
-notFoundState = angular.module 'bk.states.404', []
-
-notFoundState.config ($stateProvider) ->
+awesomeChat.config ($stateProvider) ->
     $stateProvider.state '404',
         url: '/404'
         parent: 'default'

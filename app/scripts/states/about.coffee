@@ -1,8 +1,6 @@
-'use strict'
+awesomeChat = angular.module 'ac.states.about', []
 
-notFoundState = angular.module 'bk.states.about', []
-
-notFoundState.config ($stateProvider) ->
+awesomeChat.config ($stateProvider) ->
     $stateProvider.state 'about',
         url: '/about'
         parent: 'default'

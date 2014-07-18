@@ -1,2 +1,3 @@
+require './cookies.coffee'
 
-angular.module 'bk.utils', []
+fbmodule = angular.module 'ac.utils', ['ac.utils.cookies']

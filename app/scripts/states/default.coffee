@@ -1,8 +1,6 @@
-'use strict'
+awesomeChat = angular.module 'ac.states.default', []
 
-notFoundState = angular.module 'bk.states.default', []
-
-notFoundState.config ($stateProvider) ->
+awesomeChat.config ($stateProvider) ->
     $stateProvider.state 'default',
         abstract: true
         templateUrl: 'partials/states/default.html'
