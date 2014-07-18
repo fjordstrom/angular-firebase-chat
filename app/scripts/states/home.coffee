@@ -26,18 +26,19 @@ awesomeChat.config ($stateProvider) ->
 class awesomeChat_controller
     @$inject = [
         '$scope'
+        '$rootScope'
         'acUsers'
         '$state'
     ]
-    constructor: (@$scope, @acUsers, @$state) ->
+    constructor: (@$scope, @$rootScope, @acUsers, @$state) ->
         if @acUsers.isUserLogged()
             @$scope.userLogged = true
             @$state.go 'userPanel'
 
     login: (account) ->
         @acUsers.loginUser(account).then (user) =>
-            @acUsers.getIdByUser("Ratonul").then (id_found) =>
-                @$scope.user = {
+            @acUsers.getIdByUser(account.name).then (id_found) =>
+                @$rootScope.user = {
                     name: account.name
                     id: id_found
                 }

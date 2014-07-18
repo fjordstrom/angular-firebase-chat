@@ -24,6 +24,7 @@ fbmodule.factory 'acUsers', [
                 return deferred.promise
 
             getUserById: (ID) ->
+                deferred = $q.defer()
                 database.$child(ID).$on 'loaded', (result) ->
                     if result
                         deferred.resolve result
@@ -40,6 +41,9 @@ fbmodule.factory 'acUsers', [
                             return deferred.promise
                     deferred.reject false
                     return deferred.promise
+
+            getUserId: ->
+                cookie.getCookie()
 
             addUser: (account) ->
                 deferred = $q.defer()

@@ -20,10 +20,21 @@ userPanel.config ($stateProvider) ->
 class userPanel_controller
     @$inject = [
         '$scope'
+        '$rootScope'
         'acUsers'
         '$state'
     ]
-    constructor: (@$scope, @acUsers, @$state) ->
+    constructor: (@$scope, @$rootScope, @acUsers, @$state) ->
+        if @acUsers.isUserLogged() is false
+            @$scope.userLogged = false
+            @$state.go 'home'
+        else
+            this_id = @acUsers.getUserId()
+            @acUsers.getUserById(this_id).then (result) =>
+                @$rootScope.user = {
+                    name: result.name
+                    id: this_id
+                }
 
     logout: ->
         @acUsers.logoffUser()
