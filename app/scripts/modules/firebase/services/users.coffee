@@ -101,5 +101,17 @@ fbmodule.factory 'acUsers', [
                     , (err) ->
                         deferred.reject err
                     deferred.promise
+
+            getParsedUserList: ->
+                deferred = $q.defer()
+                properList = {}
+                @getUsers().then (userList) ->
+                    for id, user of userList
+                        properList[id] = {
+                            name: user.name
+                            isLoggedIn: user.isLoggedIn
+                        }
+                    deferred.resolve properList
+                    return properList
         }
 ]

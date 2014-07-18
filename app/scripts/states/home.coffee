@@ -35,6 +35,7 @@ class awesomeChat_controller
             @$rootScope.userLogged = true
             @$state.go 'userPanel'
 
+
     login: (account) ->
         @acUsers.loginUser(account).then (user) =>
             @acUsers.getIdByUser(account.name).then (id_found) =>

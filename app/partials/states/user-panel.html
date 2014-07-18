@@ -5,6 +5,9 @@
 	<div class="col-md-12">
 		<div class="well bs-component">
 			<h4>Welcome {{$root.user.name}}!</h4>
+            <div ng-repeat="user in $root.usersList">
+                <a ng-class="{Disabled:!user.isLoggedIn}">{{user.name}}</p>
+            </div>
 			<button type="submit" class="btn btn-primary" ng-click="userCtrl.logout()">Logoff</button>
 		</div>	
 	</div>

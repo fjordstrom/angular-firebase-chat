@@ -36,6 +36,9 @@ class userPanel_controller
                     id: this_id
                 }
 
+        @acUsers.getParsedUserList().then (list) ->
+            $rootScope.usersList = list
+
     logout: ->
         @acUsers.logoffUser()
         @$rootScope.userLogged = false
