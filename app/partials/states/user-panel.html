@@ -9,7 +9,7 @@
 			<hr>
 			<h4>Online users: </h4>
             <div ng-repeat="user in $root.usersList">
-                <a ng-show="user.isLoggedIn">{{user.name}}</a>
+                <a ng-show="user.isLoggedIn" class="chatOnline">{{user.name}}</a>
             </div>
             <hr>
             <h4>Offline users: </h4>
