@@ -6375,3 +6375,12 @@ a.thumbnail.active {
 .popover {
   color: #444444;
 }
+
+.chatOnline {
+  
+}
+
+a.chatOffline, a.chatOffline:hover, a.chatOffline:active {
+  color: rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+}

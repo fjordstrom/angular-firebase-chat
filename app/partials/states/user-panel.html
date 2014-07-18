@@ -1,13 +1,22 @@
 <div class="container">
 	<div class="page-header">
-		<h1>User Panel</h1>
+		<h1>Chat Room</h1>
 	</div>
 	<div class="col-md-12">
 		<div class="well bs-component">
-			<h4>Welcome {{$root.user.name}}!</h4>
+			<h3>Welcome {{$root.user.name}}!</h3>
+			<p>Choose your partner! Click on him and start chating!</p>
+			<hr>
+			<h4>Online users: </h4>
             <div ng-repeat="user in $root.usersList">
-                <a ng-class="{Disabled:!user.isLoggedIn}">{{user.name}}</p>
+                <a ng-show="user.isLoggedIn">{{user.name}}</a>
             </div>
+            <hr>
+            <h4>Offline users: </h4>
+            <div ng-repeat="user in $root.usersList">
+                <a ng-hide="user.isLoggedIn" class="chatOffline">{{user.name}}</a>
+            </div>
+            <hr>
 			<button type="submit" class="btn btn-primary" ng-click="userCtrl.logout()">Logoff</button>
 		</div>	
 	</div>
