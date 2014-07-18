@@ -6376,11 +6376,13 @@ a.thumbnail.active {
   color: #444444;
 }
 
-.chatOnline {
-  
+a.chatOnline {
+  color: rgba(0, 255, 0, 1);
+  cursor: pointer;
 }
 
 a.chatOffline, a.chatOffline:hover, a.chatOffline:active {
   color: rgba(255, 255, 255, 0.2);
   text-decoration: none;
+  cursor: default;
 }
