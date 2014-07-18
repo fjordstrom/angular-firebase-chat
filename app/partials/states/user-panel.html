@@ -8,7 +8,7 @@
 			<p>Choose your partner! Click on him and start chating!</p>
 			<hr>
 			<h4>Online users: </h4>
-            <div ng-repeat="user in $root.usersList">
+            <div ng-repeat="user in $root.usersList" ng-if="user.name != $root.user.name">
                 <a ng-show="user.isLoggedIn" class="chatOnline" ui-sref="userPanel.chatbox({username:user.name})">{{user.name}}</a>
             </div>
             <hr>
