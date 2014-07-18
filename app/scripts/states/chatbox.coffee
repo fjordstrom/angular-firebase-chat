@@ -1,7 +1,7 @@
 chatbox = angular.module 'ac.states.chatbox', []
 
 chatbox.config ($stateProvider) ->
-    $stateProvider.state 'ac.chatbox',
+    $stateProvider.state 'user-panel.chatbox',
         url: '/:username'
         templateUrl : 'partials/partials/chatbox.html'
         controller: 'ChatBox_Controller as cbCtrl'

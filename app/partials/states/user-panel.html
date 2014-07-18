@@ -17,6 +17,9 @@
                 <a ng-hide="user.isLoggedIn" class="chatOffline">{{user.name}}</a>
             </div>
             <hr>
+            <br/>
+                <div ui-view></div>
+            <br/>
 			<button type="submit" class="btn btn-primary" ng-click="userCtrl.logout()">Logoff</button>
 		</div>	
 	</div>
