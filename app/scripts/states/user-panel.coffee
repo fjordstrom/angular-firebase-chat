@@ -2,7 +2,7 @@ userPanel = angular.module 'ac.states.user-panel', ['ac.firebase.users']
 
 userPanel.config ($stateProvider) ->
     $stateProvider.state 'userPanel',
-        url: '/'
+        url: ''
         parent: 'default'
         views:
             header:
