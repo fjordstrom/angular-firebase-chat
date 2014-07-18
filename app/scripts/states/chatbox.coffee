@@ -1,15 +1,15 @@
 chatbox = angular.module 'ac.states.chatbox', []
 
 chatbox.config ($stateProvider) ->
-    $stateProvider.state 'awesome_chat.chatterbox',
+    $stateProvider.state 'ac.chatbox',
         url: '/:username'
-        templateUrl : 'views/pages/chatterbox.html'
+        templateUrl : 'partials/partials/chatbox.html'
         controller: 'ChatBox_Controller as cbCtrl'
         data:
             pageTitle: "Awesome <strong>Chat</strong>"
             meta:
-                title: 'Chat with awesome people'
-                keywords: 'NextCasino, chat, awesome'
+                title: 'Awesome Chat'
+                keywords: 'chat, awesome'
                 description: 'Chat with awesome people.'
 
 class ChatBox_Controller
