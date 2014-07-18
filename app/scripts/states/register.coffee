@@ -19,10 +19,16 @@ register.config ($stateProvider) ->
 
 class register_controller
     @$inject = [
+        '$rootScope'
         '$scope'
         'acUsers'
+        '$state'
     ]
-    constructor: (@$scope, @acUsers) ->
+    constructor: (@$rootScope, @$scope, @acUsers, @$state) ->
+        if @acUsers.isUserLogged()
+            @$rootScope.userLogged = true
+            console.log 'da'
+            @$state.go 'userPanel'
 
     register: (account) ->
         @acUsers.addUser(account).then (user) ->
