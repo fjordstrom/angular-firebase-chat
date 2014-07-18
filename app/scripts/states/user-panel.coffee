@@ -38,7 +38,6 @@ class userPanel_controller
 
         @acUsers.getParsedUserList().then (list) ->
             $rootScope.usersList = list
-            console.log 'list', list
 
     logout: ->
         @acUsers.logoffUser()
