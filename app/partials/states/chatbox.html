@@ -1,8 +1,8 @@
 <div class="container">
     <h4>You're chatting with <span class="text-info">{{username}}<span></h4>
     <br/>
-    <div class="row" style="overflow: auto; max-height: 200px;">
-	    <p>messages</p>
+    <div ng-repeat="message in messageList" class="row" style="overflow: auto; max-height: 200px;">
+	    <p message-line></p>
     </div>
     <div class="row col-md-5">
 	    <form class="form-horizontal" role="login" ng-submit="">
