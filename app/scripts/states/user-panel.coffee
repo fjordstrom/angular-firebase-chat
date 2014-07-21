@@ -16,8 +16,6 @@ userPanel.config ($stateProvider) ->
                 (acUsers) ->
                     acUsers.isUserLogged()
             ]
-#        onEnter: ->
-#            console.log 'enter', arguments
         data:
             pageTitle: "Awesome <strong>Chat</strong>"
             meta:

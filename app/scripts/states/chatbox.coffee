@@ -28,7 +28,7 @@ class ChatBox_Controller
     ]
     constructor: (@$scope, @$rootScope, @$stateParams, @messages, @userAuthenticated) ->
         @$scope.username = $stateParams.username
-        @$scope.$parent.chatActive = true
+        @$scope.chatActive = true
         @$scope.currentUser = @userAuthenticated.user
         @messages.getConvMessages($scope.currentUser.name,$stateParams.username).then (result) ->
             $rootScope.messageList = result;
