@@ -1,11 +1,16 @@
 <div class="container">
     <h4>You're chatting with <span class="text-info">{{username}}<span></h4>
     <br/>
-    <div ng-repeat="message in messageList" class="row" style="overflow: auto; max-height: 200px;">
-	    <p message-line></p>
-    </div>
+    <div class="row">
+    	<div style="overflow: auto; max-height: 200px;" class="col-md-5">
+		    <div ng-repeat="message in messageList">
+			    <p message-line></p>
+		    </div>
+		</div>
+	</div>
     <div class="row col-md-5">
-	    <form class="form-horizontal" role="login" ng-submit="">
+        <hr>
+	    <form class="form-horizontal" role="sendMessage" ng-submit="">
 		    <div class="form-group">
 	    		<input type="text" class="form-control" ng-model="account.name" id="inputUsername2" placeholder="Message">
 		    </div>
