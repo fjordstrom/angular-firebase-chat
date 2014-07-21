@@ -1,12 +1,10 @@
 messageTemplate = angular.module 'ac.utils.messageTemplate', []
 
-messageTemplate.controller 'Controller', ['$scope', ($scope) ->
-    message = $scope.messageList
-]
+messageTemplate.directive 'messageLine', ->
+    restrict: "A"
+    scope:
+        message: '=messageLine'
+    templateUrl: 'partials/partials/message-template.html'
+    link: ($scope) ->
 
-messageTemplate.directive('messageLine', ->
-    return {
-    template: '{{message.timestamp | date:"HH:mm:ss"}} {{message.from}}: {{message.message}}'
-    }
 
-)

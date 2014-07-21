@@ -3,9 +3,9 @@
     <br/>
     <div class="row">
     	<div style="overflow: auto; max-height: 200px;" class="col-md-5">
-		    <div ng-repeat="message in messageList">
-			    <p message-line></p>
-		    </div>
+		    <ul ng-repeat="message in messageList">
+			    <li message-line="message"></li>
+		    </ul>
 		</div>
 	</div>
     <div class="row col-md-5">
