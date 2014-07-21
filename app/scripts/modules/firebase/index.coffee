@@ -1,5 +1,6 @@
 require './services/firebase-handle.coffee'
 require './services/users.coffee'
+require './services/messages.coffee'
 
 fbmodule = angular.module 'ac.firebase', ['ac.firebase.users']
 

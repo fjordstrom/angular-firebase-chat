@@ -6,15 +6,24 @@ awesomeChat.config ($stateProvider) ->
         parent: 'default'
         views:
             header:
-                templateUrl: 'partials/partials/header.html'
+                templateUrl: '/partials/partials/header.html'
             content:
-                templateUrl: 'partials/states/home.html'
+                templateUrl: '/partials/states/home.html'
                 controller: "awesomeChat_controller as homeCtrl"
         resolve:
-            userList: [
+            redirect: [
                 'acUsers'
-                (acUsers) ->
-                    acUsers.getUsers()
+                '$state'
+                '$q'
+                (acUsers, $state, $q) ->
+                    deferred = $q.defer()
+                    acUsers.isUserLogged().then ->
+                        $state.go 'userPanel'
+                        deferred.resolve()
+                    , (err) ->
+                        deferred.resolve()
+
+                    deferred.promise
             ]
         data:
             pageTitle: "Awesome <strong>Chat</strong>"
@@ -26,13 +35,20 @@ awesomeChat.config ($stateProvider) ->
 class awesomeChat_controller
     @$inject = [
         '$scope'
+        '$rootScope'
         'acUsers'
         '$state'
     ]
-    constructor: (@$scope, @acUsers, @$state) ->
+    constructor: (@$scope, @$rootScope, @acUsers, @$state) ->
 
     login: (account) ->
-        @acUsers.authUser(account).then (user) =>
+        @acUsers.loginUser(account).then (user) =>
+            @acUsers.getIdByUser(account.name).then (id_found) =>
+                @$rootScope.user = {
+                    name: account.name
+                    id: id_found
+                }
+                @$rootScope.userLogged = true
             @$state.go 'userPanel'
         , (err) ->
             alert "#{err.desc}"

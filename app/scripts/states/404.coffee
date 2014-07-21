@@ -6,6 +6,6 @@ awesomeChat.config ($stateProvider) ->
         parent: 'default'
         views:
             header:
-                templateUrl: 'partials/partials/header.html'
+                templateUrl: '/partials/partials/header.html'
             content:
-                templateUrl: 'partials/states/404.html'
+                templateUrl: '/partials/states/404.html'

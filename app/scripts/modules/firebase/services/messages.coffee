@@ -22,14 +22,49 @@ fbmodule.factory 'acMessages', [
                 return deferred.promise
 
             getConvMessages: (receiver, sender) ->
-                keys = $database.getMessages.$getIndex()
-                keys.forEach (key) ->
-                database.$child(key).$on 'loaded', (result) ->
-                    if result
-                        deferred.resolve result
-                    else
-                        deferred.reject result
-                return deferred.promise
-        }
+                deferred = $q.defer()
+                messageList = {}
+                @getMessages().then (preList) =>
+                    for id, msg of preList
+                        if @belongsToConversation(receiver,sender,msg)
+                            messageList[id] = msg
+                    deferred.resolve messageList
+                    return messageList
 
+            belongsToConversation: (receiver,sender,message) ->
+                receiver == message.to and sender == message.from or
+                    receiver == message.from and sender == message.to
+
+            getListOfNumberOfUnreadMessages: (user) ->
+                deferred = $q.defer()
+                numberList = {}
+                @getMessages().then (preList) ->
+                    for id, msg of preList
+                        if msg.to == user && msg.isRead == false
+                            if numberList[msg.from]
+                                numberList[msg.from] += 1
+                            else
+                                numberList[msg.from] = 1
+                    deferred.resolve numberList
+                    return numberList
+
+            addMessageToDB: (from,to,message) ->
+                deferred = $q.defer()
+                database.$add(
+                    from: from
+                    to: to
+                    message: message
+                    timestamp: Firebase.ServerValue.TIMESTAMP
+                    isRead: false
+                ).then (resolve) ->
+                    deferred.resolve resolve
+                , (err) ->
+                    deferred.reject err
+
+            messageWasAdded: (user1, user2, func) ->
+                if func
+                    database.$on "child_added", (message) =>
+                        if belongs = @belongsToConversation(user1,user2,message.snapshot.value)
+                            func(message.snapshot.value)
+        }
 ]

@@ -6,9 +6,9 @@ register.config ($stateProvider) ->
         parent: 'default'
         views:
             header:
-                templateUrl: 'partials/partials/header.html'
+                templateUrl: '/partials/partials/header.html'
             content:
-                templateUrl: 'partials/states/register.html'
+                templateUrl: '/partials/states/register.html'
                 controller: "register_controller as regCtrl"
         data:
             pageTitle: "Awesome <strong>Chat</strong>"
@@ -19,10 +19,16 @@ register.config ($stateProvider) ->
 
 class register_controller
     @$inject = [
+        '$rootScope'
         '$scope'
         'acUsers'
+        '$state'
     ]
-    constructor: (@$scope, @acUsers) ->
+    constructor: (@$rootScope, @$scope, @acUsers, @$state) ->
+        if @acUsers.isUserLogged()
+            @$rootScope.userLogged = true
+            console.log 'da'
+            @$state.go 'userPanel'
 
     register: (account) ->
         @acUsers.addUser(account).then (user) ->

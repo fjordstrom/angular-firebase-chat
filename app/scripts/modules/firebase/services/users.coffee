@@ -24,12 +24,26 @@ fbmodule.factory 'acUsers', [
                 return deferred.promise
 
             getUserById: (ID) ->
+                deferred = $q.defer()
                 database.$child(ID).$on 'loaded', (result) ->
                     if result
                         deferred.resolve result
                     else
                         deferred.reject result
                 return deferred.promise
+
+            getIdByUser: (name) ->
+                deferred = $q.defer()
+                @getUsers().then (userList) ->
+                    for id, user of userList
+                        if name == user.name
+                            deferred.resolve id
+                            return deferred.promise
+                    deferred.reject false
+                    return deferred.promise
+
+            getUserId: ->
+                cookie.getCookie()
 
             addUser: (account) ->
                 deferred = $q.defer()
@@ -52,7 +66,7 @@ fbmodule.factory 'acUsers', [
                     deferred.reject err
                 deferred.promise
 
-            authUser: (account) ->
+            loginUser: (account) ->
                 deferred = $q.defer()
                 @getUsers().then (userList) ->
                     for id, user of userList
@@ -68,12 +82,38 @@ fbmodule.factory 'acUsers', [
                     deferred.reject err
                 deferred.promise
 
-            deauthUser: ->
+            logoffUser: ->
                 if cookie.isCookieSet()
                     database.$child(cookie.getCookie()).$update({
                         isLoggedIn: false
                     })
                     cookie.deleteCookie()
-        }
 
+            isUserLogged: ->
+                deferred = $q.defer()
+                if cookie.isCookieSet()
+                    @getUsers().then (userList) ->
+                        for id, user of userList
+                            if cookie.getCookie() == id
+                                deferred.resolve {user, id}
+                                return
+                        deferred.reject {desc: "user not found"}
+                    , (err) ->
+                        deferred.reject err
+                else
+                    deferred.reject {desc: "user not found"}
+                deferred.promise
+
+            getParsedUserList: ->
+                deferred = $q.defer()
+                properList = {}
+                @getUsers().then (userList) ->
+                    for id, user of userList
+                        properList[id] = {
+                            name: user.name
+                            isLoggedIn: user.isLoggedIn
+                        }
+                    deferred.resolve properList
+                    return properList
+        }
 ]
