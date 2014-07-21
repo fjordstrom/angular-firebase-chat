@@ -31,13 +31,17 @@ class ChatBox_Controller
         @$scope.$parent.chatActive = true
         @$scope.currentUser = @userAuthenticated.user
         @$scope.messageList = []
-        @messages.messageWasAdded  @$scope.currentUser.name, @$stateParams.username, (message) =>
-            @$scope.messageList.push message;
+        @messages.messageWasAdded  @$scope.currentUser.name, @$stateParams.username, (message,id) =>
+            message['id'] = id;
+            @$scope.messageList.push message
+#            console.log @$scope.messageList
+        #@messages.getConvMessages($scope.currentUser.name,$stateParams.username).then (result) ->
 
-        @messages.getConvMessages($scope.currentUser.name,$stateParams.username).then (result) ->
+
 
 
     sendMessage: (message) =>
-        @messages.addMessageToDB(@$scope.currentUser.name,@$stateParams.username,message)
-
+        if @$scope.message?.length
+            @messages.addMessageToDB(@$scope.currentUser.name,@$stateParams.username,message)
+            @$scope.message = ''
 chatbox.controller "ChatBox_Controller", ChatBox_Controller

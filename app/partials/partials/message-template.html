@@ -1,4 +1,11 @@
 <span ng-bind="message.timestamp | date:'HH:mm:ss'"></span>
 <span ng-bind="message.from"></span>
 :
-<span ng-bind="message.message"></span>
+<div ng-if="!isBeingEdited">
+    <span ng-bind="message.message"></span>
+    <button ng-show="owner==message.from" type="submit" ng-click="edit()" class="EditButton">edit</button>
+</div>
+<div ng-if="isBeingEdited">
+    <textarea ng-model="message.message" ></textarea>
+    <button type="submit" ng-click="doneEdit()">done</button>
+</div>

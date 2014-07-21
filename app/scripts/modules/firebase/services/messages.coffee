@@ -35,6 +35,9 @@ fbmodule.factory 'acMessages', [
                 receiver == message.to and sender == message.from or
                     receiver == message.from and sender == message.to
 
+            isMessageMine: (sender,message) ->
+                sender == message.from
+
             getListOfNumberOfUnreadMessages: (user) ->
                 deferred = $q.defer()
                 numberList = {}
@@ -66,6 +69,12 @@ fbmodule.factory 'acMessages', [
                 if func
                     database.$on "child_added", (message) =>
                         if belongs = @belongsToConversation(user1,user2,message.snapshot.value)
-                            func(message.snapshot.value)
+                            func(message.snapshot.value,message.snapshot.name)
+
+            modifyMessage: (id,newText) ->
+                database.$child(id).$update({
+                    message: newText
+                })
+
         }
 ]

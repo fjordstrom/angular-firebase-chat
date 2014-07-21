@@ -8,7 +8,12 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/font
     color: #000;
     padding: 0.2em 0;
 }
-
+[message-line] .EditButton{
+  display: none;
+}
+[message-line]:hover .EditButton{
+  display: inline;
+}
 /* Space out content a bit */
 
 
