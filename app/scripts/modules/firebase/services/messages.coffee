@@ -44,8 +44,5 @@ fbmodule.factory 'acMessages', [
                     deferred.resolve numberList
                     return numberList
 
-
-
         }
-
 ]

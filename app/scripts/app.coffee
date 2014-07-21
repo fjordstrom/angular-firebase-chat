@@ -23,13 +23,11 @@ app.config([
 
 ])
 app.run ($rootScope, $state) ->
-#    console.log 'matas',$rootScope
     $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
         console.error 'ERROR ON CHANGE STATE:', arguments
         if not fromState?.name?.length
             $state.go 'home'
             alert('you are not logged in!');
-
 
 require './main/main-ctrl.js'
 

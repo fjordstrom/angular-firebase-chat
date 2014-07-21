@@ -6,9 +6,9 @@ userPanel.config ($stateProvider) ->
         parent: 'default'
         views:
             header:
-                templateUrl: 'partials/partials/header.html'
+                templateUrl: '/partials/partials/header.html'
             content:
-                templateUrl: 'partials/states/user-panel.html'
+                templateUrl: '/partials/states/user-panel.html'
                 controller: "userPanel_controller as userCtrl"
         resolve:
             userAuthenticated: [
@@ -35,15 +35,13 @@ class userPanel_controller
     ]
     constructor: (@$scope, @$rootScope, @acUsers, @$state, @userAuthenticated) ->
         @$scope.chatActive = false
-#        console.log "ceva", @userAuthenticated
-        @$scope.user = @userAuthenticated.user
+        @$scope.currentUser = @userAuthenticated.user
 
         @acUsers.getParsedUserList().then (list) =>
             @$scope.usersList = list
 
     logout: ->
         @acUsers.logoffUser()
-        #@$scope.userLogged = false
         @$state.go 'home'
 
 userPanel.controller "userPanel_controller", userPanel_controller

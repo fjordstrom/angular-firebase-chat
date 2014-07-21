@@ -6,9 +6,9 @@ register.config ($stateProvider) ->
         parent: 'default'
         views:
             header:
-                templateUrl: 'partials/partials/header.html'
+                templateUrl: '/partials/partials/header.html'
             content:
-                templateUrl: 'partials/states/register.html'
+                templateUrl: '/partials/states/register.html'
                 controller: "register_controller as regCtrl"
         data:
             pageTitle: "Awesome <strong>Chat</strong>"

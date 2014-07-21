@@ -4,7 +4,8 @@ messageTemplate.directive 'messageLine', ->
     restrict: "A"
     scope:
         message: '=messageLine'
-    templateUrl: 'partials/partials/message-template.html'
+
+    templateUrl: '/partials/partials/message-template.html'
     link: ($scope) ->
 
 

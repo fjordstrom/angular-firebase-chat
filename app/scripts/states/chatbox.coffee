@@ -3,7 +3,7 @@ chatbox = angular.module 'ac.states.chatbox', ['ac.firebase.messages']
 chatbox.config ($stateProvider) ->
     $stateProvider.state 'userPanel.chatbox',
         url: '/:username'
-        templateUrl : 'partials/states/chatbox.html'
+        templateUrl : '/partials/states/chatbox.html'
         controller: 'ChatBox_Controller as cbCtrl'
         resolve:
             userAuthenticated: [
@@ -29,13 +29,11 @@ class ChatBox_Controller
     constructor: (@$scope, @$rootScope, @$stateParams, @messages, @userAuthenticated) ->
         @$scope.username = $stateParams.username
         @$scope.$parent.chatActive = true
-        @$scope.user = @userAuthenticated.user
-        @messages.getConvMessages($scope.user.name,$stateParams.username).then (result) ->
+        @$scope.currentUser = @userAuthenticated.user
+        @messages.getConvMessages($scope.currentUser.name,$stateParams.username).then (result) ->
             $rootScope.messageList = result;
-
 
     sendMessage: (message) ->
         alert "ceva", message
-
 
 chatbox.controller "ChatBox_Controller", ChatBox_Controller

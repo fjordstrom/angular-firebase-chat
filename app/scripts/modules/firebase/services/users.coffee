@@ -91,10 +91,13 @@ fbmodule.factory 'acUsers', [
 
             isUserLogged: ->
                 deferred = $q.defer()
+                console.log "pula", cookie.isCookieSet()
                 if cookie.isCookieSet()
                     @getUsers().then (userList) ->
+                        console.log "text aiurea"
                         for id, user of userList
                             if cookie.getCookie() == id
+                                console.log "iara altu"
                                 deferred.resolve {user, id}
                                 return
                         deferred.reject {desc: "user not found"}
