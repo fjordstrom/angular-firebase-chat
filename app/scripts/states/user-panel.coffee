@@ -33,6 +33,9 @@ class userPanel_controller
     ]
     constructor: (@$scope, @$rootScope, @acUsers, @$state, @userAuthenticated) ->
         @$scope.chatActive = false
+        @$scope.$on '$stateChangeStart', (event, toState) =>
+            @$scope.chatActive = toState.name == 'userPanel.chatbox'
+            
         @$scope.currentUser = @userAuthenticated.user
 
         @acUsers.getParsedUserList().then (list) =>
