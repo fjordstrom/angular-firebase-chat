@@ -21,6 +21,9 @@ fbmodule.factory 'acMessages', [
                         deferred.reject result
                 return deferred.promise
 
+            updateMessage: ->
+                console.log 'pula mea'
+
             getConvMessages: (receiver, sender) ->
                 deferred = $q.defer()
                 messageList = {}
@@ -34,6 +37,11 @@ fbmodule.factory 'acMessages', [
             belongsToConversation: (receiver,sender,message) ->
                 receiver == message.to and sender == message.from or
                     receiver == message.from and sender == message.to
+
+            editMyMessage: (id, newMessage) ->
+                database.$child(id).$update({
+                    message: newMessage
+                })
 
             getListOfNumberOfUnreadMessages: (user) ->
                 deferred = $q.defer()
@@ -65,6 +73,6 @@ fbmodule.factory 'acMessages', [
                 if func
                     database.$on "child_added", (message) =>
                         if belongs = @belongsToConversation(user1,user2,message.snapshot.value)
-                            func(message.snapshot.value)
+                            func(message.snapshot.value, message.snapshot.name)
         }
 ]

@@ -31,7 +31,8 @@ class ChatBox_Controller
         @$scope.$parent.chatActive = true
         @$scope.currentUser = @userAuthenticated.user
         @$scope.messageList = []
-        @messages.messageWasAdded  @$scope.currentUser.name, @$stateParams.username, (message) =>
+        @messages.messageWasAdded  @$scope.currentUser.name, @$stateParams.username, (message, id) =>
+            message['id'] = id;
             @$scope.messageList.push message;
 
         @messages.getConvMessages($scope.currentUser.name,$stateParams.username).then (result) ->

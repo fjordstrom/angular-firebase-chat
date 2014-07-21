@@ -4,7 +4,7 @@
     <div class="row">
     	<div style="overflow: auto; max-height: 200px;" class="col-md-5">
 		    <ul ng-repeat="message in messageList">
-			    <li class="ng-binding" message-line="message"></li>
+			    <li class="ng-binding" message-line="message" message-id="message.id" message-owner="currentUser.name" edit-message="message"></li>
 		    </ul>
 		</div>
 	</div>
