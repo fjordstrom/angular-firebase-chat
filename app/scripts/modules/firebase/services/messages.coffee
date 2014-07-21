@@ -24,12 +24,16 @@ fbmodule.factory 'acMessages', [
             getConvMessages: (receiver, sender) ->
                 deferred = $q.defer()
                 messageList = {}
-                @getMessages().then (preList) ->
+                @getMessages().then (preList) =>
                     for id, msg of preList
-                        if receiver == msg.to and sender == msg.from or receiver == msg.from and sender == msg.to
+                        if @belongsToConversation(receiver,sender,msg)
                             messageList[id] = msg
                     deferred.resolve messageList
                     return messageList
+
+            belongsToConversation: (receiver,sender,message) ->
+                receiver == message.to and sender == message.from or
+                    receiver == message.from and sender == message.to
 
             getListOfNumberOfUnreadMessages: (user) ->
                 deferred = $q.defer()
@@ -44,5 +48,24 @@ fbmodule.factory 'acMessages', [
                     deferred.resolve numberList
                     return numberList
 
+            addMessageToDB: (from,to,message) ->
+                deferred = $q.defer()
+                database.$add(
+                    from: from
+                    to: to
+                    message: message
+                    timestamp: Firebase.ServerValue.TIMESTAMP
+                    isRead: false
+                ).then (resolve) ->
+                    deferred.resolve resolve
+                , (err) ->
+                    deferred.reject err
+
+
+            messageWasAdded: (user1, user2, func) ->
+                if func
+                    database.$on "child_added", (message) =>
+                        if belongs = @belongsToConversation(user1,user2,message.snapshot.value)
+                            func(message.snapshot.value)
         }
 ]

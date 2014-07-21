@@ -30,10 +30,14 @@ class ChatBox_Controller
         @$scope.username = $stateParams.username
         @$scope.$parent.chatActive = true
         @$scope.currentUser = @userAuthenticated.user
-        @messages.getConvMessages($scope.currentUser.name,$stateParams.username).then (result) ->
-            $rootScope.messageList = result;
+        @$scope.messageList =[]
+        @messages.messageWasAdded  @$scope.currentUser.name, @$stateParams.username, (message) =>
+            @$scope.messageList.push message;
 
-    sendMessage: (message) ->
-        alert "ceva", message
+        @messages.getConvMessages($scope.currentUser.name,$stateParams.username).then (result) ->
+
+
+    sendMessage: (message) =>
+        @messages.addMessageToDB(@$scope.currentUser.name,@$stateParams.username,message)
 
 chatbox.controller "ChatBox_Controller", ChatBox_Controller
