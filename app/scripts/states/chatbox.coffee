@@ -28,7 +28,7 @@ class ChatBox_Controller
     ]
     constructor: (@$scope, @$rootScope, @$stateParams, @messages, @userAuthenticated) ->
         @$scope.username = $stateParams.username
-        @$scope.$parent.chatActive = true
+        @$scope.chatActive = true
         @$scope.currentUser = @userAuthenticated.user
         @$scope.messageList =[]
         @messages.messageWasAdded  @$scope.currentUser.name, @$stateParams.username, (message) =>
