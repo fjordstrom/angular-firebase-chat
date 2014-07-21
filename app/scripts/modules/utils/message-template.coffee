@@ -1,4 +1,4 @@
-messageTemplate.module 'ac.utils.message-template', []
+messageTemplate = angular.module 'ac.utils.messageTemplate', []
 
 messageTemplate.controller 'Controller', ['$scope', ($scope) ->
     message = $scope.messageList
