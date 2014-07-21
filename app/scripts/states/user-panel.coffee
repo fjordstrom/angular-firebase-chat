@@ -25,6 +25,7 @@ class userPanel_controller
         '$state'
     ]
     constructor: (@$scope, @$rootScope, @acUsers, @$state) ->
+        @$scope.chatActive = false
         if @acUsers.isUserLogged() is false
             @$scope.userLogged = false
             @$state.go 'home'

@@ -15,11 +15,13 @@ chatbox.config ($stateProvider) ->
 class ChatBox_Controller
     @$inject = [
         '$scope'
+        '$rootScope'
         '$stateParams'
         'acMessages'
     ]
-    constructor: (@$scope, @$stateParams, @messages) ->
+    constructor: (@$scope, @$rootScope, @$stateParams, @messages) ->
         @$scope.username = $stateParams.username
+        @$scope.$parent.chatActive = true
 
 
 chatbox.controller "ChatBox_Controller", ChatBox_Controller
