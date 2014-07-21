@@ -5,6 +5,12 @@ chatbox.config ($stateProvider) ->
         url: '/:username'
         templateUrl : 'partials/states/chatbox.html'
         controller: 'ChatBox_Controller as cbCtrl'
+        resolve:
+            userAuthenticated: [
+                'acUsers'
+                (acUsers) ->
+                    acUsers.isUserLogged()
+            ]
         data:
             pageTitle: "Awesome <strong>Chat</strong>"
             meta:
@@ -18,13 +24,18 @@ class ChatBox_Controller
         '$rootScope'
         '$stateParams'
         'acMessages'
+        'userAuthenticated'
     ]
-    constructor: (@$scope, @$rootScope, @$stateParams, @messages) ->
+    constructor: (@$scope, @$rootScope, @$stateParams, @messages, @userAuthenticated) ->
         @$scope.username = $stateParams.username
         @$scope.$parent.chatActive = true
-
+        @$scope.user = @userAuthenticated.user
         @messages.getConvMessages($scope.user.name,$stateParams.username).then (result) ->
             $rootScope.messageList = result;
+
+
+    sendMessage: (message) ->
+        alert "ceva", message
 
 
 chatbox.controller "ChatBox_Controller", ChatBox_Controller

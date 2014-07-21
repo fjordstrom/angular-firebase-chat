@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="well bs-component">
-				<h3>Welcome {{$root.user.name}}!</h3>
+				<h3>Welcome {{user.name}}!</h3>
 				<p>Choose your partner! Click on him and start chating!</p>
 			</div>
 		</div>
@@ -14,12 +14,12 @@
 		<div ng-class="{'col-lg-5': chatActive, 'col-lg-12': !chatActive}">
 			<div class="well bs-component">
 				<h4>Online users: </h4>
-	            <div ng-repeat="user in $root.usersList" ng-if="user.name != $root.user.name">
+	            <div ng-repeat="user in usersList" ng-if="user.name != user.name">
 	                <a ng-show="user.isLoggedIn" class="chatOnline" ui-sref="userPanel.chatbox({username:user.name})">{{user.name}}</a>
 	            </div>
 	            <hr>
 	            <h4>Offline users: </h4>
-	            <div ng-repeat="user in $root.usersList">
+	            <div ng-repeat="user in usersList">
 	                <a ng-hide="user.isLoggedIn" class="chatOffline" ui-sref="userPanel.chatbox({username:user.name})">{{user.name}}</a>
 	            </div>
 	            <hr>

@@ -2,7 +2,7 @@ userPanel = angular.module 'ac.states.user-panel', ['ac.firebase.users']
 
 userPanel.config ($stateProvider) ->
     $stateProvider.state 'userPanel',
-        url: ''
+        url: '/chat'
         parent: 'default'
         views:
             header:
@@ -10,6 +10,14 @@ userPanel.config ($stateProvider) ->
             content:
                 templateUrl: 'partials/states/user-panel.html'
                 controller: "userPanel_controller as userCtrl"
+        resolve:
+            userAuthenticated: [
+                'acUsers'
+                (acUsers) ->
+                    acUsers.isUserLogged()
+            ]
+#        onEnter: ->
+#            console.log 'enter', arguments
         data:
             pageTitle: "Awesome <strong>Chat</strong>"
             meta:
@@ -23,26 +31,19 @@ class userPanel_controller
         '$rootScope'
         'acUsers'
         '$state'
+        'userAuthenticated'
     ]
-    constructor: (@$scope, @$rootScope, @acUsers, @$state) ->
+    constructor: (@$scope, @$rootScope, @acUsers, @$state, @userAuthenticated) ->
         @$scope.chatActive = false
-        if @acUsers.isUserLogged() is false
-            @$scope.userLogged = false
-            @$state.go 'home'
-        else
-            this_id = @acUsers.getUserId()
-            @acUsers.getUserById(this_id).then (result) =>
-                @$rootScope.user = {
-                    name: result.name
-                    id: this_id
-                }
+#        console.log "ceva", @userAuthenticated
+        @$scope.user = @userAuthenticated.user
 
-        @acUsers.getParsedUserList().then (list) ->
-            $rootScope.usersList = list
+        @acUsers.getParsedUserList().then (list) =>
+            @$scope.usersList = list
 
     logout: ->
         @acUsers.logoffUser()
-        @$rootScope.userLogged = false
+        #@$scope.userLogged = false
         @$state.go 'home'
 
 userPanel.controller "userPanel_controller", userPanel_controller

@@ -11,10 +11,20 @@ awesomeChat.config ($stateProvider) ->
                 templateUrl: 'partials/states/home.html'
                 controller: "awesomeChat_controller as homeCtrl"
         resolve:
-            userList: [
+            redirect: [
                 'acUsers'
-                (acUsers) ->
-                    acUsers.getUsers()
+                '$state'
+                '$q'
+                (acUsers, $state, $q) ->
+                    deferred = $q.defer()
+                    acUsers.isUserLogged().then ->
+                        console.log 'logged in'
+                        $state.go 'userPanel'
+                        deferred.resolve()
+                    , (err) ->
+                        deferred.resolve()
+
+                    deferred.promise
             ]
         data:
             pageTitle: "Awesome <strong>Chat</strong>"
@@ -31,9 +41,7 @@ class awesomeChat_controller
         '$state'
     ]
     constructor: (@$scope, @$rootScope, @acUsers, @$state) ->
-        if @acUsers.isUserLogged()
-            @$rootScope.userLogged = true
-            @$state.go 'userPanel'
+
 
     login: (account) ->
         @acUsers.loginUser(account).then (user) =>

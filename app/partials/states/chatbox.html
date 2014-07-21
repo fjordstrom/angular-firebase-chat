@@ -10,9 +10,9 @@
 	</div>
     <div class="row col-md-5">
         <hr>
-	    <form class="form-horizontal" role="sendMessage" ng-submit="">
+	    <form class="form-horizontal" role="sendMessage" ng-submit="cbCtrl.sendMessage(message)">
 		    <div class="form-group">
-	    		<input type="text" class="form-control" ng-model="account.name" id="inputUsername2" placeholder="Message">
+	    		<input type="text" class="form-control" ng-model="message" id="inputMessage" placeholder="Message">
 		    </div>
 		 	<div class="form-group">
 	  			<button type="submit" class="btn btn-primary">Send</button>

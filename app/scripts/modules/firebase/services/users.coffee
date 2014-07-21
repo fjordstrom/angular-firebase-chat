@@ -95,12 +95,14 @@ fbmodule.factory 'acUsers', [
                     @getUsers().then (userList) ->
                         for id, user of userList
                             if cookie.getCookie() == id
-                                deferred.resolve true
+                                deferred.resolve {user, id}
                                 return
-                        deferred.reject err
+                        deferred.reject {desc: "user not found"}
                     , (err) ->
                         deferred.reject err
-                    deferred.promise
+                else
+                    deferred.reject {desc: "user not found"}
+                deferred.promise
 
             getParsedUserList: ->
                 deferred = $q.defer()
