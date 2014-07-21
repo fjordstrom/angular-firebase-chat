@@ -3,12 +3,13 @@
 var gulp = require('gulp');
 var browserify = require('gulp-browserify');
 var rename = require('gulp-rename');
+var colors = require('colors');
 
 var $ = require('gulp-load-plugins')();
 
 gulp.task('styles', function () {
   return gulp.src('app/styles/main.scss')
-    .pipe($.rubySass({ style: 'expanded' }))
+    .pipe($.rubySass({ style: 'expanded', lineNumbers:true }).on('error', function(err){}))
     .pipe($.autoprefixer('last 1 version'))
     .pipe(gulp.dest('.tmp/styles'))
     .pipe($.size());
@@ -19,7 +20,7 @@ gulp.task('coffee', function() {
     .pipe(browserify({
       transform: ['coffeeify'],
       extensions: ['.coffee']
-    }))
+    }).on('error', function(err){console.log("COFFEE ERROR:\n".red, err.message)}))
     .pipe(rename('app.js'))
     .pipe(gulp.dest('.tmp/scripts'))
 });
