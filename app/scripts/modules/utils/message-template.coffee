@@ -7,5 +7,3 @@ messageTemplate.directive 'messageLine', ->
 
     templateUrl: '/partials/partials/message-template.html'
     link: ($scope) ->
-
-

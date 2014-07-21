@@ -36,7 +36,6 @@ class ChatBox_Controller
 
         @messages.getConvMessages($scope.currentUser.name,$stateParams.username).then (result) ->
 
-
     sendMessage: (message) =>
         @messages.addMessageToDB(@$scope.currentUser.name,@$stateParams.username,message)
 

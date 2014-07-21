@@ -61,7 +61,6 @@ fbmodule.factory 'acMessages', [
                 , (err) ->
                     deferred.reject err
 
-
             messageWasAdded: (user1, user2, func) ->
                 if func
                     database.$on "child_added", (message) =>
