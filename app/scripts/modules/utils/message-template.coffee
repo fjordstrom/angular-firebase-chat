@@ -1,18 +1,18 @@
 messageTemplate = angular.module 'ac.utils.messageTemplate', ['ac.firebase.messages']
 
-messageTemplate.directive 'messageLine', ['acMessages', (messages) ->
+messageTemplate.directive 'messageLine',  ->
     restrict: "A"
     scope:
         message: '=messageLine'
         owner: '=owner'
+        onMessageEdited: '&?'
         messageId: '=messageId'
     templateUrl: '/partials/partials/message-template.html'
     link: ($scope) ->
         $scope.isBeingEdited = false
         $scope.edit = ->
-            if (messages.isMessageMine($scope.owner,$scope.message))
-                $scope.isBeingEdited = true
+            $scope.isBeingEdited = true
         $scope.doneEdit = ->
             $scope.isBeingEdited = false
-            messages.modifyMessage($scope.messageId,$scope.message.message)
-]
+            console.log "TAC",$scope.onMessageEdited
+            $scope.onMessageEdited($scope.messageId,$scope.message.message)

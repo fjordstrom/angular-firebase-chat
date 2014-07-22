@@ -29,14 +29,14 @@ fbmodule.factory 'acMessages', [
                         if @belongsToConversation(receiver,sender,msg)
                             messageList[id] = msg
                     deferred.resolve messageList
-                    return messageList
+                return messageList
 
             belongsToConversation: (receiver,sender,message) ->
                 receiver == message.to and sender == message.from or
                     receiver == message.from and sender == message.to
 
-            isMessageMine: (sender,message) ->
-                sender == message.from
+#            isMessageMine: (sender,message) ->
+#                sender == message.from
 
             getListOfNumberOfUnreadMessages: (user) ->
                 deferred = $q.defer()
@@ -49,7 +49,7 @@ fbmodule.factory 'acMessages', [
                             else
                                 numberList[msg.from] = 1
                     deferred.resolve numberList
-                    return numberList
+                return numberList
 
             addMessageToDB: (from,to,message) ->
                 deferred = $q.defer()
