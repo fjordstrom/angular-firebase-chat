@@ -21,9 +21,6 @@ fbmodule.factory 'acMessages', [
                         deferred.reject result
                 return deferred.promise
 
-            updateMessage: ->
-                console.log 'pula mea'
-
             getConvMessages: (receiver, sender) ->
                 deferred = $q.defer()
                 messageList = {}

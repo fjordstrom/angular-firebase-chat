@@ -2,7 +2,7 @@
 <div ng-show="showme">
 	<textarea ng-model="message.message" rows="3" class="col-md-12"></textarea>
 	<br/>
-	<button class="btn btn-primary btn-sm" ng-click="showme=false; editMessage(message.message)">Submit</button>
+	<button class="btn btn-primary btn-sm" ng-click="showme=false; editMessage()">Submit</button>
 </div>
 <span ng-bind="message.timestamp | date:'HH:mm:ss'"></span>
 <span ng-bind="message.from"></span>
